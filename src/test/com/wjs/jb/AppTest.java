@@ -106,12 +106,33 @@ public class AppTest extends TestCase {
                  .k("obj")
                  .o()
                      .if_(true)
-                     .k("obj1").v("v1")
+                     .k("obj1").v(new String[]{"2-","3!","4$"})
+                     .k("obj2").v(new Integer[]{6,7,8,9})
                      .else_()
-                     .k("obj2").v("v2")
+                     .k("obj3").v("131314!@@#")
                      .eif()
                  .eo()
             .eif()
+			.k("price").v(product.getPrice())
+		.eo();
+		//@formatter:on
+
+        log(jb);
+    }
+
+    public void testKeyIf() throws ParseException {
+        Product product = new Product("Noodle", "China-HangZhou", new SimpleDateFormat("yyyy-MM-dd").parse("2016-11-11"), 120, 3);
+
+        final JB jb = new GsonJB();
+        //@formatter:off
+		jb.o()
+			.k("productName").v(product.getProductName())
+			.k("placeOfOrigin").v(product.getPlaceOfOrigin())
+			.k("expirationDate").if_(product.getExpirationDate().before(new Date()))
+				.v("Out Of Date")
+			.else_()
+				.v(product.getExpirationDate())
+			.eif()
 			.k("price").v(product.getPrice())
 		.eo();
 		//@formatter:on

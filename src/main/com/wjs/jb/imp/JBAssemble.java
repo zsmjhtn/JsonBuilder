@@ -2,6 +2,7 @@ package main.com.wjs.jb.imp;
 
 import main.com.wjs.jb.abs.IJBAppend;
 import main.com.wjs.jb.abs.IJBAssemble;
+import main.com.wjs.jb.abs.IJBAssembleIf;
 import main.com.wjs.jb.abs.IJBFilter;
 
 /**
@@ -38,6 +39,16 @@ public class JBAssemble<ParentType extends IJBAppend> extends IJBAssemble<Parent
     @Override
     public JBObject<ParentType> o(IJBFilter filter) {
         return new JBObject<ParentType>(jb, key, this.parent, true, filter);
+    }
+
+    @Override
+    public JBAssembleIf<ParentType> if_(boolean if_) {
+        return new JBAssembleIf<ParentType>(jb, parent, key, false, if_);
+    }
+
+    @Override
+    public IJBAssembleIf<ParentType> if_(Object if_) {
+        return if_(JBUtils.b(if_));
     }
 
     @Override
