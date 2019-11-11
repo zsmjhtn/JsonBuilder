@@ -24,8 +24,8 @@ public class JBArray<ParentType extends IJBAppend> extends IJBArray<ParentType> 
     }
 
     @Override
-    public IJBObject<? extends IJBArray<ParentType>> o() {
-        return null;
+    public JBObject<JBArray<ParentType>> o() {
+        return new JBObject<JBArray<ParentType>>(jb,null,this,true,null);
     }
 
     @Override
@@ -45,6 +45,16 @@ public class JBArray<ParentType extends IJBAppend> extends IJBArray<ParentType> 
             append(null, value);
         }
         return this;
+    }
+
+    @Override
+    public JBArrayIf<JBArray<ParentType>> if_(boolean if_) {
+        return new JBArrayIf<JBArray<ParentType>>(jb, this, false, if_);
+    }
+
+    @Override
+    public JBArrayIf<JBArray<ParentType>> if_(Object if_) {
+        return if_(JBUtils.b(if_));
     }
 
     @Override

@@ -11,6 +11,9 @@ public abstract class IJBArray<Parent> extends IJBAppend{
     public abstract IJBArray<? extends IJBArray<Parent>> a(IJBFilter filter);
 
     public abstract IJBArray<Parent> v(Object value);
-    
+
+    public abstract IJBArrayIf<? extends IJBArray<Parent>> if_(boolean if_);
+    public abstract IJBArrayIf<? extends IJBArray<Parent>> if_(Object if_);
+
     public abstract Parent ea() ;
 }
