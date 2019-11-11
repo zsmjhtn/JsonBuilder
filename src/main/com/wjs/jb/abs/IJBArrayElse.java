@@ -10,4 +10,13 @@ public abstract class IJBArrayElse<Parent> extends IJBAppend{
 
     public abstract Parent eif();
 
+    public abstract IJBObject<? extends IJBArrayElse<Parent>> o();
+
+    public abstract IJBObject<? extends IJBArrayElse<Parent>> o(IJBFilter filter);
+
+    public abstract IJBArray<? extends IJBArrayElse<Parent>> a();
+
+    public abstract IJBArray<? extends IJBArrayElse<Parent>> a(IJBFilter filter);
+
+
 }

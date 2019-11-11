@@ -1,7 +1,6 @@
 package main.com.wjs.jb.imp;
 
-import main.com.wjs.jb.abs.IJBAppend;
-import main.com.wjs.jb.abs.IJBArrayElse;
+import main.com.wjs.jb.abs.*;
 
 /**
  * @Auther: nku.htn
@@ -30,6 +29,26 @@ public class JBArrayElse<ParentType extends IJBAppend> extends IJBArrayElse<Pare
     @Override
     public ParentType eif() {
         return parent;
+    }
+
+    @Override
+    public JBObject<JBArrayElse<ParentType>> o() {
+        return o(null);
+    }
+
+    @Override
+    public JBObject<JBArrayElse<ParentType>> o(IJBFilter filter) {
+        return new JBObject<JBArrayElse<ParentType>>(jb,null,this,true,filter);
+    }
+
+    @Override
+    public JBArray<JBArrayElse<ParentType>> a() {
+        return a(null);
+    }
+
+    @Override
+    public JBArray<JBArrayElse<ParentType>> a(IJBFilter filter) {
+        return new JBArray<JBArrayElse<ParentType>>(this, null, jb,true,filter);
     }
 
     @Override

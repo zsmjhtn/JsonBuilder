@@ -158,7 +158,20 @@ public class AppTest extends TestCase {
 			.else_()
 				.v(product.getExpirationDate())
 			.eif()
-			.v(product.getPrice())
+            .if_(product.getExpirationDate().before(new Date()))
+				.v("Out Of Date")
+            .else_()
+                .o()
+                .k("gmail").v("zsmjhtn")
+                .eo()
+			.eif()
+            .if_(product.getExpirationDate().before(new Date()))
+				.v("Out Of Date")
+            .elseif(true)
+                .a()
+                .v("qqmail")
+                .ea()
+			.eif()
 		.ea();
 		//@formatter:on
 
