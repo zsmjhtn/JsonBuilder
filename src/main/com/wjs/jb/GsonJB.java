@@ -1,7 +1,9 @@
-package main.com.wjs.jb.imp;
+package main.com.wjs.jb;
 
 import com.google.gson.*;
 import main.com.wjs.jb.abs.IJBJsonAdapter;
+import main.com.wjs.jb.imp.JB;
+import main.com.wjs.jb.imp.JBConstants;
 
 /**
  * @Auther: nku.htn

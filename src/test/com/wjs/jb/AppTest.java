@@ -2,8 +2,10 @@ package test.com.wjs.jb;
 
 
 import junit.framework.TestCase;
-import main.com.wjs.jb.imp.GsonJB;
+import main.com.wjs.jb.FastJsonJB;
+import main.com.wjs.jb.GsonJB;
 import main.com.wjs.jb.imp.JB;
+import main.com.wjs.jb.imp.JBEntry;
 import test.com.wjs.jb.testbean.Product;
 
 import java.text.ParseException;
@@ -173,6 +175,23 @@ public class AppTest extends TestCase {
                 .ea()
 			.eif()
 		.ea();
+		//@formatter:on
+
+        log(jb);
+    }
+
+    public void testObjectFor() {
+        Integer[] array = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+        final JB jb = new FastJsonJB();
+        //@formatter:off
+		jb.o()
+			.k("square-table").o()
+				.for_(array)
+					.it((i, v)->{ return new JBEntry(v+"*"+v,v*v);})
+				.efor()
+			.eo()
+		.eo();
 		//@formatter:on
 
         log(jb);

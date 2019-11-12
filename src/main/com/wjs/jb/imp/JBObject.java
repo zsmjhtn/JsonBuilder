@@ -2,6 +2,10 @@ package main.com.wjs.jb.imp;
 
 import main.com.wjs.jb.abs.*;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+
 /**
  * @Auther: nku.htn
  * @Date: 2019/11/5
@@ -40,6 +44,17 @@ public class JBObject<ParentType extends IJBAppend> extends IJBObject<ParentType
     public JBObjectIf<JBObject<ParentType>> if_(Object _if) {
         boolean b = JBUtils.b(_if);
         return if_(b);
+    }
+
+    @Override
+    public <T> JBObjectFor<JBObject<ParentType>, T> for_(T[] ts) {
+        List<T> list = ts != null ? Arrays.asList(ts) : null;
+        return for_(list);
+    }
+
+    @Override
+    public <T> JBObjectFor<JBObject<ParentType>, T> for_(Collection<T> ts) {
+        return new JBObjectFor<JBObject<ParentType>, T>(jb, this, ts, reality);
     }
 
     @Override
