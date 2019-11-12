@@ -1,5 +1,7 @@
 package main.com.wjs.jb.abs;
 
+import java.util.Collection;
+
 /**
  * @Auther: nku.htn
  * @Date: 2019/11/5
@@ -16,4 +18,7 @@ public abstract class IJBArray<Parent> extends IJBAppend{
     public abstract IJBArrayIf<? extends IJBArray<Parent>> if_(Object if_);
 
     public abstract Parent ea() ;
+
+    public abstract <T> IJBArrayFor<? extends IJBArray<Parent>, T> for_(T[] t);
+    public abstract <T> IJBArrayFor<? extends IJBArray<Parent>, T> for_(Collection<T> collection);
 }

@@ -1,9 +1,6 @@
 package main.com.wjs.jb.imp;
 
-import main.com.wjs.jb.abs.IJBAppend;
-import main.com.wjs.jb.abs.IJBAssemble;
-import main.com.wjs.jb.abs.IJBAssembleIf;
-import main.com.wjs.jb.abs.IJBFilter;
+import main.com.wjs.jb.abs.*;
 
 /**
  * @Auther: nku.htn
@@ -47,8 +44,18 @@ public class JBAssemble<ParentType extends IJBAppend> extends IJBAssemble<Parent
     }
 
     @Override
-    public IJBAssembleIf<ParentType> if_(Object if_) {
+    public JBAssembleIf<ParentType> if_(Object if_) {
         return if_(JBUtils.b(if_));
+    }
+
+    @Override
+    public JBArray<ParentType> a() {
+        return a(null);
+    }
+
+    @Override
+    public JBArray<ParentType> a(IJBFilter filter) {
+        return new JBArray<ParentType>(parent, key, jb,true, filter);
     }
 
     @Override

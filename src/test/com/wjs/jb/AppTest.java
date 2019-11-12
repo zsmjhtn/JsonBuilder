@@ -197,4 +197,20 @@ public class AppTest extends TestCase {
         log(jb);
     }
 
+    public void testArrayFor() {
+        Integer[] array = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+        final JB jb = new GsonJB();
+        //@formatter:off
+		jb.o()
+			.k("square-list").a()
+				.for_(array)
+					.it((v)->{return v*v;})
+				.efor()
+			.ea()
+		.eo();
+		//@formatter:on
+
+        log(jb);
+    }
 }

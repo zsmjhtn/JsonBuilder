@@ -2,6 +2,10 @@ package main.com.wjs.jb.imp;
 
 import main.com.wjs.jb.abs.*;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+
 /**
  * @Auther: nku.htn
  * @Date: 2019/11/5
@@ -63,6 +67,17 @@ public class JBArray<ParentType extends IJBAppend> extends IJBArray<ParentType> 
             parent.append(key, target == null ? jb.jsonAdapter().emptyArray() : target);
         }
         return parent;
+    }
+
+    @Override
+    public <T> JBArrayFor<JBArray<ParentType>, T> for_(T[] ts) {
+        List<T> list = ts != null ? Arrays.asList(ts) : null;
+        return for_(list);
+    }
+
+    @Override
+    public <T> JBArrayFor<JBArray<ParentType>, T> for_(Collection<T> collection) {
+        return new JBArrayFor<JBArray<ParentType>, T>(jb, this, reality(), collection);
     }
 
     @Override
