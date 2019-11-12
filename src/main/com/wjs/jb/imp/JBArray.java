@@ -29,7 +29,7 @@ public class JBArray<ParentType extends IJBAppend> extends IJBArray<ParentType> 
 
     @Override
     public JBObject<JBArray<ParentType>> o() {
-        return new JBObject<JBArray<ParentType>>(jb,null,this,true,null);
+        return new JBObject<JBArray<ParentType>>(jb, null, this, true, null);
     }
 
     @Override
@@ -78,6 +78,16 @@ public class JBArray<ParentType extends IJBAppend> extends IJBArray<ParentType> 
     @Override
     public <T> JBArrayFor<JBArray<ParentType>, T> for_(Collection<T> collection) {
         return new JBArrayFor<JBArray<ParentType>, T>(jb, this, reality(), collection);
+    }
+
+    @Override
+    public IJBArray<ParentType> parse(Object... beans) {
+        if (beans != null) {
+            for(Object value : beans) {
+                this.v(value);
+            }
+        }
+        return this;
     }
 
     @Override

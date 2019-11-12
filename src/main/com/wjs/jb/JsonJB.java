@@ -1,33 +1,33 @@
 package main.com.wjs.jb;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import main.com.wjs.jb.abs.IJBJsonAdapter;
 import main.com.wjs.jb.imp.JB;
 import main.com.wjs.jb.imp.JBConstants;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
  * @Auther: nku.htn
  * @Date: 2019/11/12
  */
-public class FastJsonJB extends JB implements IJBJsonAdapter {
+public class JsonJB extends JB implements IJBJsonAdapter {
 
-    public FastJsonJB() {
+    public JsonJB() {
         this.addFilters(JBConstants.DEFAULT_FILTER);
     }
 
     @Override
-    public JSONObject json() {
-        return (JSONObject) super.json();
+    public Object json() {
+        return super.json();
     }
 
     @Override
     public String toString() {
-        return JSON.toJSONString(json());
+        return json().toString();
     }
 
 
@@ -53,11 +53,7 @@ public class FastJsonJB extends JB implements IJBJsonAdapter {
 
     @Override
     public Object map(Object v) {
-        if (v instanceof JSON) {
-            return v;
-        } else {
-            return JSON.toJSON(v);
-        }
+        return JSONObject.wrap(v);
     }
 
     @Override
@@ -68,8 +64,8 @@ public class FastJsonJB extends JB implements IJBJsonAdapter {
 
     @Override
     public void appendArray(Object jsonArray, String key, Object value) {
-        JSONArray array = (JSONArray) jsonArray;
-        array.add(map(value));
+        JSONArray ja = (JSONArray) jsonArray;
+        ja.put(map(value));
     }
 
     @Override
@@ -77,7 +73,14 @@ public class FastJsonJB extends JB implements IJBJsonAdapter {
         Object je = this.map(bean);
         if(je != null){
             if(je instanceof JSONObject){
-                return ((JSONObject) je).entrySet();
+                JSONObject jo = (JSONObject) je;
+
+                Map<String, Object> map = new HashMap<String, Object>();
+                for (final String key : ((JSONObject) je).keySet()) {
+                    final Object value = jo.get(key);
+                    map.put(key, value);
+                }
+                return map.entrySet();
             }
         }
         return null;

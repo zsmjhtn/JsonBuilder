@@ -15,4 +15,6 @@ public abstract class IJBObject<Parent> extends IJBAppend{
 
     public abstract <T> IJBObjectFor<? extends IJBObject<Parent>, T> for_(T[] t);
     public abstract <T> IJBObjectFor<? extends IJBObject<Parent>, T> for_(Collection<T> collection);
+
+    public abstract IJBObject<Parent> parse(Object bean);
 }

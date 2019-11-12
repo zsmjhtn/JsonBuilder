@@ -21,4 +21,6 @@ public abstract class IJBArray<Parent> extends IJBAppend{
 
     public abstract <T> IJBArrayFor<? extends IJBArray<Parent>, T> for_(T[] t);
     public abstract <T> IJBArrayFor<? extends IJBArray<Parent>, T> for_(Collection<T> collection);
+
+    public abstract IJBArray<Parent> parse(Object... beans);
 }

@@ -5,6 +5,9 @@ import main.com.wjs.jb.abs.IJBJsonAdapter;
 import main.com.wjs.jb.imp.JB;
 import main.com.wjs.jb.imp.JBConstants;
 
+import java.util.Collection;
+import java.util.Map;
+
 /**
  * @Auther: nku.htn
  * @Date: 2019/11/6
@@ -72,5 +75,17 @@ public class GsonJB extends JB implements IJBJsonAdapter {
     public void appendArray(Object jsonArray, String key, Object value) {
         JsonArray ja = (JsonArray) jsonArray;
         ja.add(map(value));
+    }
+
+    @Override
+    public Collection<? extends Map.Entry<String, ? extends Object>> split(Object bean) {
+        JsonElement je = this.map(bean);
+        if (je != null){
+            if(je.isJsonObject()){
+                JsonObject jb = (JsonObject) je;
+                return jb.entrySet();
+            }
+        }
+        return null;
     }
 }

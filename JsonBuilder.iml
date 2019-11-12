@@ -9,7 +9,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="com.google.code.gson:gson:2.2.2" level="project" />
     <orderEntry type="library" name="junit:junit:4.0" level="project" />
-    <orderEntry type="library" name="org.json:json:20190722" level="project" />
     <orderEntry type="library" name="com.alibaba:fastjson:1.2.60" level="project" />
+    <orderEntry type="library" name="org.json:json:20180813" level="project" />
   </component>
 </module>

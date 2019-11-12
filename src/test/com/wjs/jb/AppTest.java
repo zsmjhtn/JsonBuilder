@@ -4,9 +4,12 @@ package test.com.wjs.jb;
 import junit.framework.TestCase;
 import main.com.wjs.jb.FastJsonJB;
 import main.com.wjs.jb.GsonJB;
+import main.com.wjs.jb.JsonJB;
 import main.com.wjs.jb.imp.JB;
 import main.com.wjs.jb.imp.JBEntry;
 import test.com.wjs.jb.testbean.Product;
+import test.com.wjs.jb.testbean.ProductExtra;
+import test.com.wjs.jb.testbean.ProductPromotionPolicy;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -216,4 +219,42 @@ public class AppTest extends TestCase {
 
         log(jb);
     }
+
+	public void testObjectParse() throws ParseException {
+		Product product = new Product("Noodle", "China-HangZhou", new SimpleDateFormat("yyyy-MM-dd").parse("2017-11-11"), 120, 3);
+		ProductExtra productExtra = new ProductExtra("online");
+		ProductPromotionPolicy promotionPolicy = new ProductPromotionPolicy("满100减30");
+
+		final JB jb = new GsonJB();
+		//@formatter:off
+		jb.o()
+			.parse(product)
+			.parse(productExtra)
+			.parse(promotionPolicy)
+		.eo();
+		//@formatter:on
+
+		log(jb);
+	}
+
+	public void testArrayParse() throws ParseException {
+		Product product = new Product("Noodle", "China-HangZhou", new SimpleDateFormat("yyyy-MM-dd").parse("2017-11-11"), 120,1);
+		ProductExtra productExtra = new ProductExtra("taobao");
+		ProductPromotionPolicy promotionPolicy0 = new ProductPromotionPolicy("满100减30");
+		ProductPromotionPolicy promotionPolicy1 = new ProductPromotionPolicy("满300减100");
+		ProductPromotionPolicy promotionPolicy2 = new ProductPromotionPolicy("满500减200");
+
+		final JB jb = new JsonJB();
+		//@formatter:off
+		jb.o()
+			.parse(product)
+			.parse(productExtra)
+			.k("promotionPolicy").a()
+				.parse(promotionPolicy0, promotionPolicy1, promotionPolicy2)
+			.ea()
+		.eo();
+		//@formatter:on
+
+		log(jb);
+	}
 }

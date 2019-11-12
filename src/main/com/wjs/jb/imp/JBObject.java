@@ -5,6 +5,7 @@ import main.com.wjs.jb.abs.*;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Auther: nku.htn
@@ -55,6 +56,19 @@ public class JBObject<ParentType extends IJBAppend> extends IJBObject<ParentType
     @Override
     public <T> JBObjectFor<JBObject<ParentType>, T> for_(Collection<T> ts) {
         return new JBObjectFor<JBObject<ParentType>, T>(jb, this, ts, reality);
+    }
+
+    @Override
+    public IJBObject<ParentType> parse(Object bean) {
+        if(reality() && bean != null){
+            Collection<? extends Map.Entry<String,? extends Object>> collection = jb.jsonAdapter().split(bean);
+            if(collection != null) {
+                for (Map.Entry<String, ? extends Object> entry : collection) {
+                    this.append(entry.getKey(), entry.getValue());
+                }
+            }
+        }
+        return this;
     }
 
     @Override
