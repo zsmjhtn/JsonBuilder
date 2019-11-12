@@ -207,6 +207,9 @@ public class AppTest extends TestCase {
 				.for_(array)
 					.it((v)->{return v*v;})
 				.efor()
+				.for_(array)
+					.it()
+				.efor()
 			.ea()
 		.eo();
 		//@formatter:on
