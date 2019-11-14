@@ -25,7 +25,7 @@ public class JBAssembleIf<ParentType extends IJBAppend> extends IJBAssembleIf<Pa
     }
 
     @Override
-    public IJBAssembleIfPrepareEnd<ParentType> v(Object value) {
+    public JBAssembleIfPrepareEnd<ParentType> v(Object value) {
         if(reality()) {
             parent.append(key, value);
         }

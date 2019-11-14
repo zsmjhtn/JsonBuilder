@@ -23,10 +23,32 @@ public class JBAssembleElse<ParentType extends IJBAppend> extends IJBAssembleEls
 
     @Override
     public JBAssembleElsePrepareEnd<ParentType> v(Object value) {
-        if(reality()) {
+        if (reality()) {
             parent.append(key, value);
         }
         return new JBAssembleElsePrepareEnd<ParentType>(parent, reality());
+    }
+
+    @Override
+    public JBObject<JBAssembleElsePrepareEnd<ParentType>> o() {
+        return o(null);
+    }
+
+    @Override
+    public JBObject<JBAssembleElsePrepareEnd<ParentType>> o(IJBFilter filter) {
+        JBAssembleElsePrepareEnd<ParentType> end = new JBAssembleElsePrepareEnd<ParentType>(parent, brotherReality);
+        return new JBObject<JBAssembleElsePrepareEnd<ParentType>>(jb, key, end, reality(), filter);
+    }
+
+    @Override
+    public JBArray<JBAssembleElsePrepareEnd<ParentType>> a() {
+        return a(null);
+    }
+
+    @Override
+    public JBArray<JBAssembleElsePrepareEnd<ParentType>> a(IJBFilter filter) {
+        JBAssembleElsePrepareEnd<ParentType> end = new JBAssembleElsePrepareEnd<ParentType>(parent, brotherReality);
+        return new JBArray<JBAssembleElsePrepareEnd<ParentType>>(end, key, jb, reality(), filter);
     }
 
     @Override

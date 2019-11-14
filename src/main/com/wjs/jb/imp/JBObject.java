@@ -59,7 +59,7 @@ public class JBObject<ParentType extends IJBAppend> extends IJBObject<ParentType
     }
 
     @Override
-    public IJBObject<ParentType> parse(Object bean) {
+    public JBObject<ParentType> parse(Object bean) {
         if(reality() && bean != null){
             Collection<? extends Map.Entry<String,? extends Object>> collection = jb.jsonAdapter().split(bean);
             if(collection != null) {

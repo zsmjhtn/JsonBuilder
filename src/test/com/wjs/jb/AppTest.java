@@ -148,6 +148,27 @@ public class AppTest extends TestCase {
         log(jb);
     }
 
+	public void testEhanceElse() throws ParseException {
+		Product product = new Product("Noodle", "China-HangZhou", new SimpleDateFormat("yyyy-MM-dd").parse("2022-11-11"), 120, 3);
+
+		final JB jb = new GsonJB();
+		//@formatter:off
+		jb.o()
+			.k("productName").v(product.getProductName())
+			.k("expirationDate").if_(product.getExpirationDate().before(new Date()))
+				.v("Out Of Date")
+			.else_()
+				.o()
+				.parse(product)
+				.eo()
+			.eif()
+			.k("price").v(product.getPrice())
+		.eo();
+		//@formatter:on
+
+		log(jb);
+	}
+
     public void testArrayIf() throws ParseException {
         Product product = new Product("Noodle", "China-HangZhou", new SimpleDateFormat("yyyy-MM-dd").parse("2022-11-11"), 120, 4);
 

@@ -25,7 +25,9 @@ public class JBAssembleElsePrepareEnd<ParentType extends IJBAppend> extends IJBA
 
     @Override
     public void append(String key, Object value) {
-        // deal in "v" scope
+        if (reality()) {
+            parent.append(key, value);
+        }
     }
 
     @Override
